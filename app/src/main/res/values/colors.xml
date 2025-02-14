@@ -6,4 +6,7 @@
     <color name="primary_color">#3b614a</color>
     <color name="secondary_color">#ebe9cb</color>
     <color name="tertiary_color">#dab55d</color>
+    <color name="green_button">#5DCE8A</color>
+    <color name="text_button_color">#EBE9CB</color>
+
 </resources>
