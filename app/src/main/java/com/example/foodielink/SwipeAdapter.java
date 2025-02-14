@@ -21,7 +21,7 @@ public class SwipeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 14;
+        return 50;
     }
 
     @Override

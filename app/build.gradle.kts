@@ -41,4 +41,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.github.Yalantis:Koloda-Android:v0.0.2-alpha") // SwipeCards from GitHub
+
 }
