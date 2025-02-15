@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@color/tertiary_color"
-    tools:context=".register">
+    tools:context=".RegisterActivity">
 
     <LinearLayout
         android:id="@+id/linearLayoutContainer"

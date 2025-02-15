@@ -13,8 +13,6 @@
         android:theme="@style/Theme.Foodielink"
         tools:targetApi="31" >
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".register" android:exported="false" />
-        <activity android:name=".register2" android:exported="false"/>
         <activity android:name=".SwipePage" android:exported="false"/>
         <activity
             android:name=".MainActivity"
