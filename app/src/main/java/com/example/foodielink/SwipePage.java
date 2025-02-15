@@ -35,6 +35,11 @@ public class SwipePage extends AppCompatActivity {
         list.add(R.drawable.dish11);
         list.add(R.drawable.dish12);
         list.add(R.drawable.dish13);
+        list.add(R.drawable.dish14);
+        list.add(R.drawable.dish15);
+        list.add(R.drawable.dish16);
+        list.add(R.drawable.dish17);
+        list.add(R.drawable.dish18);
 
         Collections.shuffle(list);
 

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         xButton = findViewById(R.id.xButton);
 
         btnCreateAccount.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, register.class);
+            Intent i = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(i);
         });
 
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         xButton.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/login"));
-            startActivity(intent);
         });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
