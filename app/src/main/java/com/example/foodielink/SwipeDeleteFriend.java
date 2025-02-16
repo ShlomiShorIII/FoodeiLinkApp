@@ -4,11 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+public class SwipeDeleteFriend extends ItemTouchHelper.SimpleCallback {
 
-    ContactsAdapter adapter;
+    FriendsAdapter adapter;
 
-    public SwipeToDeleteCallback(ContactsAdapter a) {
+    public SwipeDeleteFriend(FriendsAdapter a) {
         super(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         adapter = a;
     }
@@ -21,6 +21,10 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int pos = viewHolder.getAdapterPosition();
-        adapter.DeleteContact(pos);
+        if (direction == ItemTouchHelper.RIGHT) {
+            adapter.DeleteFriend(pos);}
+        else {
+            adapter.notifyItemChanged(pos);
+        }
     }
 }

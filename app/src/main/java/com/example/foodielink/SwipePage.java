@@ -1,6 +1,10 @@
 package com.example.foodielink;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yalantis.library.Koloda;
@@ -45,5 +49,16 @@ public class SwipePage extends AppCompatActivity {
 
         adapter = new SwipeAdapter(this, list);
         koloda.setAdapter(adapter);
+
+        ImageView chatButton = findViewById(R.id.nav_chat);
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SwipePage.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
 }

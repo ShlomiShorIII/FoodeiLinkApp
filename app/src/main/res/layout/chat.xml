@@ -87,20 +87,20 @@
             android:contentDescription="Profile"/>
 
         <ImageView
-            android:id="@+id/nav_chat"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_weight="1"
-            android:src="@drawable/logonavi1"
-            android:contentDescription="Chat"/>
-
-        <ImageView
             android:id="@+id/nav_search"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:layout_weight="1"
-            android:src="@drawable/logonavi4"
+            android:src="@drawable/logonavi1"
             android:contentDescription="Search"/>
+
+        <ImageView
+            android:id="@+id/nav_chat"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_weight="1"
+            android:src="@drawable/logonavi4"
+            android:contentDescription="Chat"/>
 
         <ImageView
             android:id="@+id/nav_calender"
@@ -117,6 +117,7 @@
             android:layout_weight="1"
             android:src="@drawable/logonavi5"
             android:contentDescription="Location"/>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -13,6 +13,7 @@ public class FriendsViewHolder extends RecyclerView.ViewHolder {
     public ImageView avatar_image;
     public TextView avatar_name;
     public TextView avatar_location;
+    public TextView last_seen_time;
     public CardView card;
 
 
@@ -21,6 +22,7 @@ public class FriendsViewHolder extends RecyclerView.ViewHolder {
         this.avatar_image = itemView.findViewById(R.id.avatar_image);
         this.avatar_name = itemView.findViewById(R.id.avatar_name);
         this.avatar_location = itemView.findViewById(R.id.avatar_location);
+        last_seen_time = itemView.findViewById(R.id.last_seen_time);
         this.card = itemView.findViewById(R.id.card);
     }
 }
