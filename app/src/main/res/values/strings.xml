@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This file contains the dropdown menus (Spinners) found on the registration page of the application. -->
+
 <resources>
     <string name="app_name">Foodielink</string>
 

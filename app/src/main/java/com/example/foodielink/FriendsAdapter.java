@@ -1,10 +1,13 @@
 package com.example.foodielink;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -32,6 +35,21 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
         holder.avatar_location.setText(contact.getLocation());
         holder.avatar_image.setImageResource(contact.getAvatar());
         holder.last_seen_time.setText(contact.getLastSeenTime());
+
+        holder.card.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FriendActivity.class);
+                intent.putExtra("contact", contact);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        (Activity) v.getContext(),
+                        holder.card,
+                        "cardTransition"
+                );
+                v.getContext().startActivity(intent, options.toBundle());
+            }
+
+        });
     }
 
     @Override
@@ -41,6 +59,8 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
 
     public void DeleteFriend(int pos) {
         friends.remove(pos);
-        notifyDataSetChanged();
+        notifyItemRemoved(pos);
+        notifyItemRangeChanged(pos, friends.size());
     }
+
 }

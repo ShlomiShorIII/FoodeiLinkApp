@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondary_color"
-    tools:context=".MainActivity"
-    tools:ignore="MissingConstraints">
+    tools:context=".MainActivity">
+
+    <!-- Top part of the screen -->
+
+    <ImageView
+        android:id="@+id/backgroundPattern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="420dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493"
+        app:srcCompat="@drawable/pattern2" />
+
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="550dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <!-- Filling in details -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/secondary_color"
-        app:cardCornerRadius="0dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -23,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="28dp">
+            android:padding="24dp">
 
             <TextView
                 android:id="@+id/welcomeTitle"
@@ -35,7 +64,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/pleaseLoginTitle"
+                android:id="@+id/pleaseLoginSubTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
@@ -44,7 +73,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="30dp" />
+                android:layout_height="24dp" />
 
             <TextView
                 android:id="@+id/emailTitle"
@@ -60,11 +89,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter your email"
                 android:drawableEnd="@drawable/done_icon"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textSize="16sp"/>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="20dp" />
+                android:layout_height="16dp" />
 
             <TextView
                 android:id="@+id/passwordTitle"
@@ -82,7 +112,8 @@
                 android:hint="Enter your password"
                 android:drawableEnd="@drawable/password_eye"
                 android:drawablePadding="8dp"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="16sp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -92,9 +123,9 @@
                     android:id="@+id/rememberMeCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Remember me"
                     android:layout_centerVertical="true"
                     android:alpha="0.7"
-                    android:text="Remember me"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -102,8 +133,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
                     android:text="I forgot my password"
+                    android:layout_centerVertical="true"
                     android:textStyle="bold"
                     android:textColor="@color/forgot_button_color" />
 
@@ -111,7 +142,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+                android:layout_height="16dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
@@ -120,11 +151,11 @@
                 android:backgroundTint="@color/primary_color"
                 android:text="Login"
                 android:textColor="@color/white"
-                app:cornerRadius="16dp" />
+                app:cornerRadius="12dp" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+                android:layout_height="8dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCreateAccount"
@@ -133,12 +164,13 @@
                 android:backgroundTint="@color/primary_color"
                 android:text="Create Account"
                 android:textColor="@color/white"
-                app:cornerRadius="16dp" />
+                app:cornerRadius="12dp" />
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="10dp" />
 
+            <!-- External login -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -176,39 +208,8 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="418dp"
-        android:layout_height="619dp"
-        android:layout_marginBottom="420dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.493"
-        app:srcCompat="@drawable/pattern2" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="550dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/logo" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

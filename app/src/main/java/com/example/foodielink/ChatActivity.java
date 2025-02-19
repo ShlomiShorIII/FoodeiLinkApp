@@ -24,6 +24,14 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
 
+        if (getIntent().hasExtra("avatarRes")) {
+            int avatarRes = getIntent().getIntExtra("avatarRes", 0);
+            ImageView userAvatar = findViewById(R.id.avatar_image);
+            if (avatarRes != 0 && userAvatar != null) {
+                userAvatar.setImageResource(avatarRes);
+            }
+        }
+
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
