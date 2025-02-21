@@ -29,13 +29,12 @@
 
             <ImageView
                 android:id="@+id/backArrow"
-                android:layout_width="54dp"
-                android:layout_height="54dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/arrow2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/avatar_image"
