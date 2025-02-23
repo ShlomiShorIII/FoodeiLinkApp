@@ -27,7 +27,7 @@ public class FriendActivity extends AppCompatActivity {
             return insets;
         });
 
-
+        // Retrieving selected friend data
         Friend contact = null;
         if (getIntent().getExtras() != null) {
             contact = (Friend) getIntent().getExtras().getSerializable("contact");
@@ -38,6 +38,7 @@ public class FriendActivity extends AppCompatActivity {
         TextView tvLocation = findViewById(R.id.avatar_location);
         TextView tvLastSeen = findViewById(R.id.last_seen_time);
 
+        // Displaying friend details if available
         if (contact != null) {
             iv.setImageResource(contact.getAvatar());
             tvName.setText(contact.getName());
@@ -45,6 +46,7 @@ public class FriendActivity extends AppCompatActivity {
             tvLastSeen.setText(contact.getLastSeenTime());
         }
 
+        // Back button to return to chat screen
         ImageView backArrow = findViewById(R.id.backArrow);
 
         backArrow.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,7 @@
     android:background="@color/tertiary_color"
     android:paddingTop="16dp">
 
+    <!-- Header bar with title and logo -->
     <LinearLayout
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,6 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
+    <!-- Koloda component for displaying swipe cards -->
     <com.yalantis.library.Koloda
         android:id="@+id/koloda"
         android:layout_width="400dp"
@@ -64,6 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
 
+    <!-- Custom bottom navigation menu -->
     <LinearLayout
         android:id="@+id/custom_bottom_nav"
         android:layout_width="match_parent"

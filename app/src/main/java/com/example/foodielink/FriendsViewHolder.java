@@ -8,15 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+// ViewHolder for an item in the friends list
 public class FriendsViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView avatar_image;
-    public TextView avatar_name;
-    public TextView avatar_location;
-    public TextView last_seen_time;
-    public CardView card;
+    public ImageView avatar_image; // Friend's avatar image
+    public TextView avatar_name; // Friend's name
+    public TextView avatar_location; // Friend's location
+    public TextView last_seen_time; // Last seen time
+    public CardView card; // Friend's card layout
 
-
+    // Constructor that initializes the UI components
     public FriendsViewHolder(@NonNull View itemView) {
         super(itemView);
         this.avatar_image = itemView.findViewById(R.id.avatar_image);

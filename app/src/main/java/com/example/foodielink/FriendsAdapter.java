@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+// Adapter for displaying a list of friends in RecyclerView
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
 
+    // List of friends
     private List<Friend> friends;
 
+    // Constructor to initialize friends list
     public FriendsAdapter(List<Friend> friendsList) {
         this.friends = friendsList;
     }
@@ -36,6 +39,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
         holder.avatar_image.setImageResource(contact.getAvatar());
         holder.last_seen_time.setText(contact.getLastSeenTime());
 
+        // Opening FriendActivity when the card is clicked
         holder.card.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -57,6 +61,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
         return friends.size();
     }
 
+    // Removing a friend from the list and updating the view
     public void DeleteFriend(int pos) {
         friends.remove(pos);
         notifyItemRemoved(pos);

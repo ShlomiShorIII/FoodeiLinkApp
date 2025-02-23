@@ -11,6 +11,7 @@
     tools:context=".FriendActivity"
     android:padding="8dp">
 
+    <!-- Header bar with back button, profile picture, and user details -->
     <LinearLayout
         android:id="@+id/headerBar"
         android:layout_width="match_parent"
@@ -89,6 +90,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
+    <!-- Chat messages list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"

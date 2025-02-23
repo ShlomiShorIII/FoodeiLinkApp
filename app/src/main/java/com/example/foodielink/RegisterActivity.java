@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+// Registration screen for creating a new account
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -21,12 +22,14 @@ public class RegisterActivity extends AppCompatActivity {
 
         setContentView(R.layout.register_activity);
 
+        // Adjusting insets to fit system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.scrollViewRegisterAll), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Initializing user input fields
         EditText edtUserName = findViewById(R.id.edtUserName2);
         EditText edtEmail = findViewById(R.id.edtEmailAddressLog2);
         EditText edtPassword = findViewById(R.id.edtPassword);

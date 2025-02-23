@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
-    <!-- Filling in details -->
+    <!-- Card containing login form -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -54,6 +54,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <!-- Titles -->
             <TextView
                 android:id="@+id/welcomeTitle"
                 android:layout_width="wrap_content"
@@ -75,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="24dp" />
 
+            <!-- Email field -->
             <TextView
                 android:id="@+id/emailTitle"
                 android:layout_width="wrap_content"
@@ -96,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="16dp" />
 
+            <!-- Password field -->
             <TextView
                 android:id="@+id/passwordTitle"
                 android:layout_width="wrap_content"
@@ -144,6 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="16dp" />
 
+            <!-- Login buttons -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"

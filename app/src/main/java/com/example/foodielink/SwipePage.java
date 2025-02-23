@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
+// Screen for swiping food dishes
 public class SwipePage extends AppCompatActivity {
 
     private SwipeAdapter adapter;
@@ -23,8 +24,10 @@ public class SwipePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_page);
 
+        // Initializing Koloda swipe component
         koloda = findViewById(R.id.koloda);
 
+        // Creating a list of food dish images
         list = new ArrayList<>();
         list.add(R.drawable.dish1);
         list.add(R.drawable.dish2);
@@ -45,11 +48,14 @@ public class SwipePage extends AppCompatActivity {
         list.add(R.drawable.dish17);
         list.add(R.drawable.dish18);
 
+        // Shuffling the list for a random order
         Collections.shuffle(list);
 
+        // Setting up the adapter and attaching it to Koloda
         adapter = new SwipeAdapter(this, list);
         koloda.setAdapter(adapter);
 
+        // Button to navigate to chat screen on click
         ImageView chatButton = findViewById(R.id.nav_chat);
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override

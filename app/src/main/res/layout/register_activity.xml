@@ -10,6 +10,7 @@
     android:background="@color/tertiary_color"
     tools:context=".RegisterActivity">
 
+    <!-- Main layout container -->
     <LinearLayout
         android:id="@+id/linearLayoutContainer"
         android:layout_width="match_parent"
@@ -54,6 +55,7 @@
                 android:src="@drawable/logo3" />
         </LinearLayout>
 
+        <!-- Background image with friends -->
         <ImageView
             android:id="@+id/friends"
             android:layout_width="match_parent"
@@ -62,6 +64,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/friends" />
 
+        <!-- Card for entering personal details -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewRegister1"
             android:layout_width="match_parent"
@@ -167,6 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="8dp" />
 
+                <!-- Location selection button -->
                 <Button
                     android:id="@+id/btnSelectLocation"
                     android:layout_width="match_parent"
@@ -186,7 +190,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-
+        <!-- Card for setting user preferences -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewRegister2"
             android:layout_width="match_parent"
@@ -296,6 +300,7 @@
                     android:textStyle="bold|italic"
                     android:textColor="@color/tertiary_color" />
 
+                <!-- Uploading dish images -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
