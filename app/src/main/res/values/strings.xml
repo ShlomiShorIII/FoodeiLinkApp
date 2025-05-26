@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This file contains the dropdown menus (Spinners) found on the registration page of the application. -->
+
+<resources>
+    <string name="app_name">Foodielink</string>
+
+    <string-array name="dietary_preferences">
+        <item>Select your dietary preferences</item>
+        <item>Kosher</item>
+        <item>Gluten-Free</item>
+        <item>Vegan</item>
+        <item>Low-Carb</item>
+        <item>Low-Fat</item>
+        <item>High-Protein</item>
+        <item>Mediterranean Diet</item>
+        <item>Dairy-Free</item>
+        <item>Nut-Free</item>
+        <item>No Preference</item>
+    </string-array>
+
+    <string-array name="cooking_preferences">
+        <item>Select a preference</item>
+        <item>Italian</item>
+        <item>Mediterranean</item>
+        <item>Mexican</item>
+        <item>Indian</item>
+        <item>Asian</item>
+        <item>Greek</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="why_you_are_here">
+        <item>Select why you are here</item>
+        <item>Find cooking inspiration</item>
+        <item>Meet other food lovers</item>
+        <item>Share my recipes</item>
+        <item>Discover new restaurants</item>
+        <item>Improve my cooking skills</item>
+        <item>Other</item>
+    </string-array>
+
+
+
+
+</resources>

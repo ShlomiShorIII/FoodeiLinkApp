@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Foodielink" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+    <style name="Theme.Foodielink" parent="Base.Theme.Foodielink" />
+    <style name="Shape" parent="">
+        <item name="cornerSize">5%</item>
+    </style>
+</resources>

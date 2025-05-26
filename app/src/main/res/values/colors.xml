@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    In this file, we define the colors used in the application.
+    Each color serves a different purpose, such as primary colors, backgrounds, buttons, and texts.
+-->
+
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="primary_color">#3b614a</color>
+    <color name="secondary_color">#ebe9cb</color>
+    <color name="tertiary_color">#dab55d</color>
+    <color name="green_button">#5DCE8A</color>
+    <color name="text_button_color">#EBE9CB</color>
+    <color name="forgot_button_color">#2c47d5</color>
+
+</resources>

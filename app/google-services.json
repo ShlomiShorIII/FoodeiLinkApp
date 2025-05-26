@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "145972094953",
+    "project_id": "foodielink-b8011",
+    "storage_bucket": "foodielink-b8011.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145972094953:android:27ed49d34197c3e9424d78",
+        "android_client_info": {
+          "package_name": "com.example.foodielink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7Vxvj4KNpTyEJyBa_pynvgfvAJ_gT1t4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
