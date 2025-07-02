@@ -1,8 +1,10 @@
 package com.example.foodielink;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -87,5 +89,23 @@ public class ProfileActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     e.printStackTrace();
                 });
+
+        ImageView chatButton = findViewById(R.id.nav_chat);
+        chatButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, ChatActivity.class);
+            startActivity(intent);
+        });
+
+        ImageView navLocation = findViewById(R.id.nav_location);
+        navLocation.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, UpdatePickLocationActivity.class);
+            startActivity(intent);
+        });
+
+        ImageView navSearch = findViewById(R.id.nav_search);
+        navSearch.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, SwipePage.class);
+            startActivity(intent);
+        });
     }
 }

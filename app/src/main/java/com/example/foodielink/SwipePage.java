@@ -76,6 +76,7 @@ public class SwipePage extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Button to navigate to Profile screen on click
         ImageView navProfile = findViewById(R.id.nav_profile);
         navProfile.setOnClickListener(v -> {
            Intent intent = new Intent(SwipePage.this,ProfileActivity.class);

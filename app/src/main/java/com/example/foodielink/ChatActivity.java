@@ -57,7 +57,7 @@ public class ChatActivity extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeDeleteFriend(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        // Navigate to search page when chef hat icon is clicked
+        // Button to navigate to Search screen on click
         ImageView chefHat = findViewById(R.id.nav_search);
         chefHat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +65,20 @@ public class ChatActivity extends AppCompatActivity {
                 Intent intent = new Intent(ChatActivity.this, SwipePage.class);
                 startActivity(intent);
             }
+        });
+
+        // Button to navigate to Profile screen on click
+        ImageView navProfile = findViewById(R.id.nav_profile);
+        navProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(ChatActivity.this,ProfileActivity.class);
+            startActivity(intent);
+        });
+
+        // Button to navigate to Location screen on click
+        ImageView navLocation = findViewById(R.id.nav_location);
+        navLocation.setOnClickListener(v -> {
+            Intent intent = new Intent(ChatActivity.this, UpdatePickLocationActivity.class);
+            startActivity(intent);
         });
 
     }

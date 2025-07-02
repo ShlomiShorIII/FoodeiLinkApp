@@ -230,14 +230,6 @@
             android:contentDescription="Chat"/>
 
         <ImageView
-            android:id="@+id/nav_calender"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_weight="1"
-            android:src="@drawable/logonavi3"
-            android:contentDescription="Calender"/>
-
-        <ImageView
             android:id="@+id/nav_location"
             android:layout_width="54dp"
             android:layout_height="54dp"
