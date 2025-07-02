@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/search_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search for a place..."
+        android:inputType="text"
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:padding="12dp"
+        android:background="@android:drawable/edit_text"
+        android:layout_margin="8dp"/>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_below="@id/search_location"
+        android:layout_above="@id/btnSaveLocation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/btnSaveLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Location"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/primary_color"
+        android:textColor="@color/white"/>
+</RelativeLayout>

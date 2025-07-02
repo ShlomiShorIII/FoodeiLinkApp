@@ -15,5 +15,6 @@
     <color name="green_button">#5DCE8A</color>
     <color name="text_button_color">#EBE9CB</color>
     <color name="forgot_button_color">#2c47d5</color>
+    <color name="gray">#6E6C6C</color>
 
 </resources>

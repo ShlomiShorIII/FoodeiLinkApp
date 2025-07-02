@@ -69,6 +69,18 @@ public class SwipePage extends AppCompatActivity {
             }
         });
 
+        // Button to navigate to Location screen on click
+        ImageView navLocation = findViewById(R.id.nav_location);
+        navLocation.setOnClickListener(v -> {
+            Intent intent = new Intent(SwipePage.this, UpdatePickLocationActivity.class);
+            startActivity(intent);
+        });
+
+        ImageView navProfile = findViewById(R.id.nav_profile);
+        navProfile.setOnClickListener(v -> {
+           Intent intent = new Intent(SwipePage.this,ProfileActivity.class);
+           startActivity(intent);
+        });
     }
 
 }

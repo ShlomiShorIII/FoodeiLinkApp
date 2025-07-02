@@ -4,10 +4,12 @@
 
     <uses-feature android:name="android.hardware.camera" android:required="true"></uses-feature>
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,10 +21,17 @@
         android:theme="@style/Theme.Foodielink"
         tools:targetApi="31" >
 
-        <activity android:name=".FriendActivity" />
-        <activity android:name=".ChatActivity"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC3CuDYBjtwGhAvOYDG4kKRYrSybuoIH24" />
+
+        <activity android:name=".FriendActivity" android:exported="false"/>
+        <activity android:name=".ChatActivity" android:exported="false"/>
         <activity android:name=".SwipePage" android:exported="false"/>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity" android:exported="false" />
+        <activity android:name=".UpdatePickLocationActivity" android:exported="false" />
+        <activity android:name=".PickLocationRegistrationActivity" android:exported="false" />
+        <activity android:name=".ProfileActivity" android:exported="false" />
         <activity android:name=".MainActivity" android:exported="true">
 
             <intent-filter>

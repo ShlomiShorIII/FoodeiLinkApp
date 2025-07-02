@@ -1,7 +1,13 @@
 package com.example.foodielink;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,26 +17,63 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.util.HashMap;
 
-import gun0912.tedimagepicker.builder.TedImagePicker;
-import gun0912.tedimagepicker.builder.listener.OnSelectedListener;
-
 public class RegisterActivity extends AppCompatActivity {
 
+    private static final int CAMERA_PERMISSION_CODE = 100;
+    private static final int CAMERA_REQUEST_CODE = 101;
+
     private FirebaseAnalytics mFirebaseAnalytics;
-    private ImageView addProfilePhoto, imgDish1, imgDish2, imgDish3;
-    private android.net.Uri currentImageUri;
+    private ImageView addProfilePhoto;
+    private ImageView imgDish1, imgDish2, imgDish3;
+    private double selectedLatitude = 0.0;
+    private double selectedLongitude = 0.0;
+    private Bitmap capturedImageBitmap;
+
+    private void checkCameraPermissionAndOpenCamera() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_CODE);
+        } else {
+            openCameraDirectly();
+        }
+    }
+
+    private void openCameraDirectly() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCameraDirectly();
+            } else {
+                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,32 +93,12 @@ public class RegisterActivity extends AppCompatActivity {
         imgDish2 = findViewById(R.id.imgDish2);
         imgDish3 = findViewById(R.id.imgDish3);
 
-        addProfilePhoto.setOnClickListener(v -> {
-            TedImagePicker.with(this)
-                    .title("Select Profile Photo")
-                    .start(uri -> {
-                        addProfilePhoto.setImageURI(uri);
-                        currentImageUri = uri;
-                    });
-        });
+        addProfilePhoto.setOnClickListener(v -> checkCameraPermissionAndOpenCamera());
 
-        imgDish1.setOnClickListener(v -> {
-            TedImagePicker.with(this)
-                    .title("Select Dish 1 Photo")
-                    .start((OnSelectedListener) uri -> imgDish1.setImageURI(uri));
-        });
-
-        imgDish2.setOnClickListener(v -> {
-            TedImagePicker.with(this)
-                    .title("Select Dish 2 Photo")
-                    .start((OnSelectedListener) uri -> imgDish2.setImageURI(uri));
-        });
-
-        imgDish3.setOnClickListener(v -> {
-            TedImagePicker.with(this)
-                    .title("Select Dish 3 Photo")
-                    .start((OnSelectedListener) uri -> imgDish3.setImageURI(uri));
-        });
+        // תמונות מגלריה בלבד (לא חובה לשנות)
+        imgDish1.setOnClickListener(v -> selectImageFromGallery(101));
+        imgDish2.setOnClickListener(v -> selectImageFromGallery(102));
+        imgDish3.setOnClickListener(v -> selectImageFromGallery(103));
 
         EditText edtUserName = findViewById(R.id.edtUserName2);
         EditText edtEmail = findViewById(R.id.edtEmailAddressLog2);
@@ -83,28 +106,25 @@ public class RegisterActivity extends AppCompatActivity {
         EditText edtAge = findViewById(R.id.edtAge2);
         EditText edtAboutMe = findViewById(R.id.edtAboutMe);
 
+        Button btnSelectLocation = findViewById(R.id.btnSelectLocation);
+        btnSelectLocation.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, PickLocationRegistrationActivity.class);
+            startActivityForResult(intent, 1001);
+        });
+
         Spinner spinnerCooking = findViewById(R.id.spinner_cooking_preferences);
         ArrayAdapter<CharSequence> adapterCooking = ArrayAdapter.createFromResource(
-                this,
-                R.array.cooking_preferences,
-                android.R.layout.simple_spinner_dropdown_item
-        );
+                this, R.array.cooking_preferences, android.R.layout.simple_spinner_dropdown_item);
         spinnerCooking.setAdapter(adapterCooking);
 
         Spinner spinnerDietary = findViewById(R.id.spinner_dietary_preferences);
         ArrayAdapter<CharSequence> adapterDietary = ArrayAdapter.createFromResource(
-                this,
-                R.array.dietary_preferences,
-                android.R.layout.simple_spinner_dropdown_item
-        );
+                this, R.array.dietary_preferences, android.R.layout.simple_spinner_dropdown_item);
         spinnerDietary.setAdapter(adapterDietary);
 
         Spinner spinnerWhyHere = findViewById(R.id.spinner_why_here);
         ArrayAdapter<CharSequence> adapterWhyHere = ArrayAdapter.createFromResource(
-                this,
-                R.array.why_you_are_here,
-                android.R.layout.simple_spinner_dropdown_item
-        );
+                this, R.array.why_you_are_here, android.R.layout.simple_spinner_dropdown_item);
         spinnerWhyHere.setAdapter(adapterWhyHere);
 
         Button btnFinish = findViewById(R.id.btnFinish);
@@ -137,7 +157,6 @@ public class RegisterActivity extends AppCompatActivity {
                             return;
                         }
 
-                        // Sending an app Register event
                         Bundle analyticsBundle = new Bundle();
                         analyticsBundle.putString(FirebaseAnalytics.Param.METHOD, "email");
                         analyticsBundle.putString("user_email", email);
@@ -147,11 +166,13 @@ public class RegisterActivity extends AppCompatActivity {
                         HashMap<String, Object> userMap = new HashMap<>();
                         userMap.put("name", name);
                         userMap.put("email", email);
-                        userMap.put("age", age);
+                        userMap.put("password", password);
+                        userMap.put("age", Integer.parseInt(age));
                         userMap.put("aboutMe", aboutMe);
                         userMap.put("cookingPreference", cooking);
                         userMap.put("dietaryPreference", dietary);
                         userMap.put("whyHere", whyHere);
+                        userMap.put("location", new GeoPoint(selectedLatitude, selectedLongitude));
 
                         FirebaseFirestore.getInstance()
                                 .collection("Users")
@@ -170,5 +191,33 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(this, "Registration failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     });
         });
+    }
+
+    private void selectImageFromGallery(int code) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, code);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            addProfilePhoto.setImageBitmap(photo);
+        }
+
+        if (requestCode == 1001 && resultCode == RESULT_OK && data != null) {
+            selectedLatitude = data.getDoubleExtra("latitude", 0.0);
+            selectedLongitude = data.getDoubleExtra("longitude", 0.0);
+            Toast.makeText(this, "Selected location: " + selectedLatitude + ", " + selectedLongitude, Toast.LENGTH_LONG).show();
+        }
+
+        if (resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri imageUri = data.getData();
+            if (requestCode == 101) imgDish1.setImageURI(imageUri);
+            if (requestCode == 102) imgDish2.setImageURI(imageUri);
+            if (requestCode == 103) imgDish3.setImageURI(imageUri);
+        }
     }
 }
