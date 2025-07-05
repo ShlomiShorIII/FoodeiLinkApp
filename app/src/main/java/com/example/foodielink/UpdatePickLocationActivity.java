@@ -109,7 +109,12 @@ public class UpdatePickLocationActivity extends AppCompatActivity implements OnM
             startActivity(intent);
         });
 
-
+        // Button to navigate to Login Page
+        ImageView logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(UpdatePickLocationActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void searchLocationByName(String locationName) {

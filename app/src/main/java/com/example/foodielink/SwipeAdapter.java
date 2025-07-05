@@ -39,17 +39,23 @@ public class SwipeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
+        ViewHolder holder;
+
         if (convertView == null) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_koloda, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_koloda, parent, false);
+            holder = new ViewHolder();
+            holder.imageView = convertView.findViewById(R.id.image);
+            convertView.setTag(holder);
         } else {
-            view = convertView;
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        // Initialize the image component and set the resource
-        ImageView imageView = view.findViewById(R.id.image);
-        imageView.setImageResource(list.get(position % list.size()));
+        holder.imageView.setImageResource(list.get(position % list.size()));
+        return convertView;
+    }
 
-        return view;
+    // ViewHolder inner class
+    static class ViewHolder {
+        ImageView imageView;
     }
 }

@@ -29,11 +29,11 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        // אתחול Firebase
+        // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // קישור אל ה-TextViews
+        // Bind UI TextViews
         aboutText = findViewById(R.id.about_text);
         nameText = findViewById(R.id.user_name);
         ageText = findViewById(R.id.user_age);
@@ -42,10 +42,10 @@ public class ProfileActivity extends AppCompatActivity {
         dietaryPrefText = findViewById(R.id.dietary_preferences);
         whyHereText = findViewById(R.id.why_here);
 
-        // שליפת UID
+        // Get current user ID
         String userId = mAuth.getCurrentUser().getUid();
 
-        // קריאה למסמך המשתמש
+        // Fetch user document from Firestore
         db.collection("Users").document(userId)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -62,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
                         nameText.setText("Name: " + (name != null ? name : ""));
                         ageText.setText("Age: " + (age != null ? age.toString() : ""));
 
-                        // המרת קואורדינטות לכתובת
+                        // Convert coordinates to address
                         if (geoPoint != null) {
                             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
                             try {
@@ -90,21 +90,38 @@ public class ProfileActivity extends AppCompatActivity {
                     e.printStackTrace();
                 });
 
+        // Button to navigate to Chat screen on click
         ImageView chatButton = findViewById(R.id.nav_chat);
         chatButton.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, ChatActivity.class);
             startActivity(intent);
         });
 
+        // Button to navigate to Location screen on click
         ImageView navLocation = findViewById(R.id.nav_location);
         navLocation.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, UpdatePickLocationActivity.class);
             startActivity(intent);
         });
 
+        // Button to navigate to Search screen on click
         ImageView navSearch = findViewById(R.id.nav_search);
         navSearch.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, SwipePage.class);
+            startActivity(intent);
+        });
+
+        // Button to navigate to Login Page
+        ImageView logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        // Button to navigate to Edit Profile Page
+        ImageView editProfileButton = findViewById(R.id.edit_profile_button);
+        editProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
             startActivity(intent);
         });
     }

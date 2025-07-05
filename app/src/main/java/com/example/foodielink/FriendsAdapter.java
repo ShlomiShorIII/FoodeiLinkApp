@@ -27,13 +27,17 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
     @NonNull
     @Override
     public FriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflate the friend card layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.friend, parent, false);
         return new FriendsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FriendsViewHolder holder, int position) {
+        // Get the friend at the current position
         Friend contact = friends.get(position);
+
+        // Bind friend data to UI components
         holder.avatar_name.setText(contact.getName());
         holder.avatar_location.setText(contact.getLocation());
         holder.avatar_image.setImageResource(contact.getAvatar());
@@ -43,21 +47,38 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
         holder.card.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                // Create intent to open friend details screen
                 Intent intent = new Intent(v.getContext(), FriendActivity.class);
                 intent.putExtra("contact", contact);
+
+                // Create transition animation
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         (Activity) v.getContext(),
                         holder.card,
                         "cardTransition"
                 );
+
+                // Start FriendActivity with animation
                 v.getContext().startActivity(intent, options.toBundle());
             }
 
         });
     }
 
+    // Get friend at a specific position
+    public Friend getFriendAt(int position) {
+        return friends.get(position);
+    }
+
+    // Restore a previously deleted friend at a specific position
+    public void restoreFriend(Friend friend, int position) {
+        friends.add(position, friend);
+        notifyItemInserted(position);
+    }
+
     @Override
     public int getItemCount() {
+        // Return number of friends
         return friends.size();
     }
 

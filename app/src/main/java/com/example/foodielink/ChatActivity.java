@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,23 +25,29 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Set the layout for this activity
         setContentView(R.layout.chat);
 
         // Load avatar image if received via Intent
         if (getIntent().hasExtra("avatarRes")) {
             int avatarRes = getIntent().getIntExtra("avatarRes", 0);
+
+            // Set the avatar image if valid
             ImageView userAvatar = findViewById(R.id.avatar_image);
             if (avatarRes != 0 && userAvatar != null) {
                 userAvatar.setImageResource(avatarRes);
             }
         }
 
-        // Set up RecyclerView and layout manager
+        // Initialize RecyclerView and set layout manager
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Create the friends list
+        // Initialize the friends list
         friendsList = new ArrayList<>();
+
+        // Add friends to the list
         friendsList.add(new Friend("Ron Cohen", R.drawable.avatar1, "Tel Aviv", "16/02/2025"));
         friendsList.add(new Friend("Sarah Levi", R.drawable.avatar2, "Ramat Gan", "16/02/2025"));
         friendsList.add(new Friend("Jude Omer", R.drawable.avatar3, "Tel Aviv", "15/02/2025"));
@@ -49,7 +57,7 @@ public class ChatActivity extends AppCompatActivity {
         friendsList.add(new Friend("Naor Feldman", R.drawable.avatar7, "Tel Aviv", "15/02/2025"));
         friendsList.add(new Friend("Amit Gross", R.drawable.avatar8, "Ramat Gan", "13/02/2025"));
 
-        // Set up adapter and attach it to RecyclerView
+        // Initialize adapter and attach it to RecyclerView
         adapter = new FriendsAdapter(friendsList);
         recyclerView.setAdapter(adapter);
 
@@ -81,5 +89,17 @@ public class ChatActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Button to navigate to Login Page
+        ImageView logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(v -> {
+            // Sign out from Firebase
+            FirebaseAuth.getInstance().signOut();
+
+            // Navigate to login screen (MainActivity)
+            Intent intent = new Intent(ChatActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // optional: prevent going back
+            startActivity(intent);
+            finish();
+        });
     }
 }

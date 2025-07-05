@@ -17,10 +17,14 @@ public class FriendActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Enable edge-to-edge display
         EdgeToEdge.enable(this);
 
+        // Set the layout for this activity
         setContentView(R.layout.activity_friend);
 
+        // Handle system window insets for full screen experience
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -28,11 +32,9 @@ public class FriendActivity extends AppCompatActivity {
         });
 
         // Retrieving selected friend data
-        Friend contact = null;
-        if (getIntent().getExtras() != null) {
-            contact = (Friend) getIntent().getExtras().getSerializable("contact");
-        }
+        Friend contact = (Friend) getIntent().getSerializableExtra("contact");
 
+        // Find UI elements by ID
         ImageView iv = findViewById(R.id.avatar_image);
         TextView tvName = findViewById(R.id.avatar_name);
         TextView tvLocation = findViewById(R.id.avatar_location);

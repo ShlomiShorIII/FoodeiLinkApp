@@ -40,7 +40,5 @@
         <item>Other</item>
     </string-array>
 
-
-
-
+    <string name="default_web_client_id">1145972094953-vjda9m9f21n0vr1dafo9p392bfog9odv.apps.googleusercontent.com</string>
 </resources>

@@ -5,37 +5,37 @@ import java.io.Serializable;
 // Represents a friend in the chat
 public class Friend implements Serializable {
 
-    private int Avatar;
-    private String Name;
-    private String Location;
-    private String LastSeenTime;
+    private int avatar;
+    private String name;
+    private String location;
+    private String lastSeenTime;
 
     // Constructor to initialize Friend object
     public Friend(String name, int avatar, String location, String lastSeenTime) {
-        Name = name;
-        Avatar = avatar;
-        Location = location;
-        LastSeenTime = lastSeenTime;
+        this.name = name;
+        this.avatar = avatar;
+        this.location = location;
+        this.lastSeenTime = lastSeenTime;
     }
 
     // Getter for avatar image
     public int getAvatar() {
-        return Avatar;
+        return avatar;
     }
 
     // Getter for friend's name
     public String getName() {
-        return Name;
+        return name;
     }
 
     // Getter for friend's location
     public String getLocation() {
-        return Location;
+        return location;
     }
 
     // Getter for last seen time
     public String getLastSeenTime() {
-        return LastSeenTime;
+        return lastSeenTime;
     }
 
 }

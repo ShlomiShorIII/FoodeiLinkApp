@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import gun0912.tedimagepicker.builder.TedImagePicker;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,16 +36,21 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    // Request codes for permissions and activities
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 101;
 
+    // Firebase analytics
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    // UI components
     private ImageView addProfilePhoto;
     private ImageView imgDish1, imgDish2, imgDish3;
     private double selectedLatitude = 0.0;
     private double selectedLongitude = 0.0;
     private Bitmap capturedImageBitmap;
 
+    // Check camera permission and open camera if allowed
     private void checkCameraPermissionAndOpenCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -56,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    // Launch the camera intent
     private void openCameraDirectly() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
@@ -63,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    // Handle permission result
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -77,41 +85,49 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Initialize Firebase Analytics
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.register_activity);
 
+        // Handle system window insets (for scroll padding)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.scrollViewRegisterAll), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Initialize image views
         addProfilePhoto = findViewById(R.id.profileImage);
         imgDish1 = findViewById(R.id.imgDish1);
         imgDish2 = findViewById(R.id.imgDish2);
         imgDish3 = findViewById(R.id.imgDish3);
 
-        addProfilePhoto.setOnClickListener(v -> checkCameraPermissionAndOpenCamera());
+        // Open camera on profile photo click
+        addProfilePhoto.setOnClickListener(v -> {TedImagePicker.with(this).title("Select a profile picture").
+                start(uri -> {addProfilePhoto.setImageURI(uri);});});
 
-        // תמונות מגלריה בלבד (לא חובה לשנות)
+        // Select dish images from gallery
         imgDish1.setOnClickListener(v -> selectImageFromGallery(101));
         imgDish2.setOnClickListener(v -> selectImageFromGallery(102));
         imgDish3.setOnClickListener(v -> selectImageFromGallery(103));
 
+        // Form fields
         EditText edtUserName = findViewById(R.id.edtUserName2);
         EditText edtEmail = findViewById(R.id.edtEmailAddressLog2);
         EditText edtPassword = findViewById(R.id.edtPassword);
         EditText edtAge = findViewById(R.id.edtAge2);
         EditText edtAboutMe = findViewById(R.id.edtAboutMe);
 
+        // Location selection
         Button btnSelectLocation = findViewById(R.id.btnSelectLocation);
         btnSelectLocation.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, PickLocationRegistrationActivity.class);
             startActivityForResult(intent, 1001);
         });
 
+        // Dropdown spinners
         Spinner spinnerCooking = findViewById(R.id.spinner_cooking_preferences);
         ArrayAdapter<CharSequence> adapterCooking = ArrayAdapter.createFromResource(
                 this, R.array.cooking_preferences, android.R.layout.simple_spinner_dropdown_item);
@@ -127,8 +143,10 @@ public class RegisterActivity extends AppCompatActivity {
                 this, R.array.why_you_are_here, android.R.layout.simple_spinner_dropdown_item);
         spinnerWhyHere.setAdapter(adapterWhyHere);
 
+        // Finish button (submit form)
         Button btnFinish = findViewById(R.id.btnFinish);
         btnFinish.setOnClickListener(v -> {
+            // Read inputs
             String name = edtUserName.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
@@ -138,6 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
             String dietary = spinnerDietary.getSelectedItem().toString();
             String whyHere = spinnerWhyHere.getSelectedItem().toString();
 
+            // Validate inputs
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || age.isEmpty() || aboutMe.isEmpty()) {
                 Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show();
                 return;
@@ -148,6 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
+            // Register user with Firebase Authentication
             FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener(authResult -> {
@@ -157,11 +177,13 @@ public class RegisterActivity extends AppCompatActivity {
                             return;
                         }
 
+                        // Log analytics event
                         Bundle analyticsBundle = new Bundle();
                         analyticsBundle.putString(FirebaseAnalytics.Param.METHOD, "email");
                         analyticsBundle.putString("user_email", email);
                         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, analyticsBundle);
 
+                        // Save user data to Firestore
                         String uid = firebaseUser.getUid();
                         HashMap<String, Object> userMap = new HashMap<>();
                         userMap.put("name", name);
@@ -193,31 +215,35 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    // Launch image picker for dish images
     private void selectImageFromGallery(int code) {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, code);
+        TedImagePicker.with(this).start(uri -> {
+                    if (code == 101) {
+                        imgDish1.setImageURI(uri);
+                    } else if (code == 102) {
+                        imgDish2.setImageURI(uri);
+                    } else if (code == 103) {
+                        imgDish3.setImageURI(uri);
+                    }
+        });
     }
 
+    // Handle results from camera, location picker, and gallery
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Handle camera result
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             addProfilePhoto.setImageBitmap(photo);
         }
 
+        // Handle location result
         if (requestCode == 1001 && resultCode == RESULT_OK && data != null) {
             selectedLatitude = data.getDoubleExtra("latitude", 0.0);
             selectedLongitude = data.getDoubleExtra("longitude", 0.0);
             Toast.makeText(this, "Selected location: " + selectedLatitude + ", " + selectedLongitude, Toast.LENGTH_LONG).show();
-        }
-
-        if (resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri imageUri = data.getData();
-            if (requestCode == 101) imgDish1.setImageURI(imageUri);
-            if (requestCode == 102) imgDish2.setImageURI(imageUri);
-            if (requestCode == 103) imgDish3.setImageURI(imageUri);
         }
     }
 }

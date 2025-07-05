@@ -82,6 +82,13 @@ public class SwipePage extends AppCompatActivity {
            Intent intent = new Intent(SwipePage.this,ProfileActivity.class);
            startActivity(intent);
         });
+
+        // Button to navigate to Login Page
+        ImageView logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SwipePage.this, MainActivity.class);
+            startActivity(intent);
+        });
     }
 
 }
