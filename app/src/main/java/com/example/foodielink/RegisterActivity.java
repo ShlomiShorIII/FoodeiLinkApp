@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
@@ -48,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imgDish1, imgDish2, imgDish3;
     private double selectedLatitude = 0.0;
     private double selectedLongitude = 0.0;
-    private Bitmap capturedImageBitmap;
 
     // Check camera permission and open camera if allowed
     private void checkCameraPermissionAndOpenCamera() {
@@ -109,9 +107,12 @@ public class RegisterActivity extends AppCompatActivity {
                 start(uri -> {addProfilePhoto.setImageURI(uri);});});
 
         // Select dish images from gallery
-        imgDish1.setOnClickListener(v -> selectImageFromGallery(101));
-        imgDish2.setOnClickListener(v -> selectImageFromGallery(102));
-        imgDish3.setOnClickListener(v -> selectImageFromGallery(103));
+        imgDish1.setOnClickListener(v -> {TedImagePicker.with(this).title("Select Dish 1 picture").
+                start(uri -> {imgDish1.setImageURI(uri);});});
+        imgDish2.setOnClickListener(v -> {TedImagePicker.with(this).title("Select Dish 2 picture").
+                start(uri -> {imgDish2.setImageURI(uri);});});
+        imgDish3.setOnClickListener(v -> {TedImagePicker.with(this).title("Select Dish 3 picture").
+                start(uri -> {imgDish3.setImageURI(uri);});});
 
         // Form fields
         EditText edtUserName = findViewById(R.id.edtUserName2);
@@ -212,19 +213,6 @@ public class RegisterActivity extends AppCompatActivity {
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Registration failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     });
-        });
-    }
-
-    // Launch image picker for dish images
-    private void selectImageFromGallery(int code) {
-        TedImagePicker.with(this).start(uri -> {
-                    if (code == 101) {
-                        imgDish1.setImageURI(uri);
-                    } else if (code == 102) {
-                        imgDish2.setImageURI(uri);
-                    } else if (code == 103) {
-                        imgDish3.setImageURI(uri);
-                    }
         });
     }
 
