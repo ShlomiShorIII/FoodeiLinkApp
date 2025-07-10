@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance(); // Firestore
 
         // Bind UI TextViews
         aboutText = findViewById(R.id.about_text);

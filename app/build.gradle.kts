@@ -44,8 +44,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
-    implementation(libs.firebase.firestore)
-    implementation(libs.firebase.storage)
+    implementation(libs.firebase.firestore) // For small data, like text
+    implementation(libs.firebase.storage) // For big data, like pictures
     implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

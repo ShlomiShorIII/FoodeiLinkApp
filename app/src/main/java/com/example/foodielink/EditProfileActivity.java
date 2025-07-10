@@ -24,7 +24,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private Spinner spinnerCooking, spinnerDietary, spinnerWhyHere;
     private Button btnSave;
 
-    private FirebaseFirestore db;
+    private FirebaseFirestore db; // Firestore
     private FirebaseAuth mAuth;
 
     @Override
