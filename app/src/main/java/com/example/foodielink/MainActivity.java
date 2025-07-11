@@ -99,8 +99,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Handle Google Sign-In button click
         googleButton.setOnClickListener(v -> {
-            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
+            // Force account chooser to show up by signing out first
+            mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            });
         });
     }
 
