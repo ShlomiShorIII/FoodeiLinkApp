@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     // Request codes for permissions and activities
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 101;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 102;
 
     // Firebase analytics
     private FirebaseAnalytics mFirebaseAnalytics;
